@@ -5,6 +5,7 @@ public class VideoChatExample : MonoBehaviour {
 	
 	public bool LAN;
 	public bool testMode;
+	public bool pngCompression;
 	
 	//Optional, VideoChat will create these for you if you do not assign them
 	public GameObject videoObject;
@@ -23,10 +24,11 @@ public class VideoChatExample : MonoBehaviour {
 	public bool acousticEchoCancellation = false;
 	public int width = 64;
 	public int height = 64;
+	public int chunkSize = 16;
 	
-	private string stringWidth = "64";
-	private string stringHeight = "64";
-	private string stringChunkSize = "16";	
+	private string stringWidth = "";
+	private string stringHeight = "";
+	private string stringChunkSize = "";	
 
 	//Unity Networking stuff
 	private HostData[]    hostData;
@@ -38,6 +40,7 @@ public class VideoChatExample : MonoBehaviour {
 	
 	// Use this for initialization
 	IEnumerator Start() {
+
 		if( Application.isWebPlayer ) {
 			yield return Application.RequestUserAuthorization( UserAuthorization.WebCam | UserAuthorization.Microphone );
 			LAN = false;
@@ -45,6 +48,11 @@ public class VideoChatExample : MonoBehaviour {
 
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;		
 
+		stringWidth = width + "";
+		stringHeight = height + "";
+		stringChunkSize = chunkSize + "";
+
+		VideoChat.pngCompression  = pngCompression;
 		VideoChat.requestedWidth  = width;
 		VideoChat.requestedHeight = height;
 		VideoChat.audioOut3D      = audioOut3D;
@@ -100,6 +108,10 @@ public class VideoChatExample : MonoBehaviour {
 		if( connectionResult == "IncorrectParameters" || connectionResult == "" )
 			StartCoroutine( "Restart" );
 	}	
+
+	void OnApplicationQuit() {
+		LANParty.End();
+	}
 	
 	void OnDisconnectedFromServer() {
 		//StartCoroutine( "Restart" );
@@ -128,6 +140,8 @@ public class VideoChatExample : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		if( !VideoChat.tempImage )
+			return;
 		GUI.Label( new Rect( 0, 0, Screen.width, Screen.height ), VideoChat.log );
 		if( Network.peerType == NetworkPeerType.Disconnected ) {
 			bool oldTestMode = testMode;

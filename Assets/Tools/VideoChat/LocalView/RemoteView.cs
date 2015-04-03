@@ -3,40 +3,40 @@ using System.Collections;
 using OpenCVForUnity;
 using Rect = UnityEngine.Rect;
 
-public class LocalView:MonoBehaviour
+public class RemoteView:MonoBehaviour
 {
 
-	private bool _init = false;
+	public bool localView;
 	private CascadeClassifier _cascade;
 
-	private void Init()
+	private void Start()
 	{
-		_init = true;
+		_cascade = new CascadeClassifier(Utils.getFilePath("haarcascade_frontalface_alt.xml"));
 	}
 	private void Update()
 	{
 		VideoChat.localView = true;
-		if(VideoChat.localView && renderer.material.GetTexture("_MainTex") != VideoChat.localViewTexture)
+		if(VideoChat.localView && renderer.material.GetTexture("_MainTex") != VideoChat.networkTexture)
 		{
-			var tmpTexture = VideoChat.localViewTexture;
+			var tmpTexture = VideoChat.networkTexture;
 
-//			renderer.material.SetTexture("_MainTex", tmpTexture);
-			var rt = new RenderTexture(tmpTexture.width, tmpTexture.height,24);
+			//			renderer.material.SetTexture("_MainTex", tmpTexture);
+			var rt = new RenderTexture(tmpTexture.width, tmpTexture.height, 24);
 
-			Graphics.Blit(tmpTexture,rt);
+			Graphics.Blit(tmpTexture, rt);
 
 			var camTexture = new Texture2D(tmpTexture.width, tmpTexture.height);
 
 			RenderTexture.active = rt;
-			camTexture.ReadPixels(new Rect(0,0,tmpTexture.width,tmpTexture.height), 0,0);
+			camTexture.ReadPixels(new Rect(0, 0, tmpTexture.width, tmpTexture.height), 0, 0);
 			camTexture.Apply();
 
 
 			Mat imgMat = new Mat(camTexture.height, camTexture.width, CvType.CV_8UC4);
 
 			Utils.texture2DToMat(camTexture, imgMat);
-//			Debug.Log("imgMat dst ToString " + imgMat.ToString());
-
+			//			Debug.Log("imgMat dst ToString " + imgMat.ToString());
+			
 			Mat grayMat = new Mat();
 			Imgproc.cvtColor(imgMat, grayMat, Imgproc.COLOR_RGBA2GRAY);
 			Imgproc.equalizeHist(grayMat, grayMat);
@@ -53,8 +53,7 @@ public class LocalView:MonoBehaviour
 			{
 				Debug.Log("detect faces " + rect);
 
-				Core.rectangle(imgMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 1);
-				Core.rectangle(imgMat, new Point(rect.x-10, rect.y-10), new Point(rect.x + rect.width+10, rect.y + rect.height+10), new Scalar(0, 255, 0, 255), 1);
+				Core.rectangle(imgMat, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 2);
 			}
 
 
@@ -63,10 +62,12 @@ public class LocalView:MonoBehaviour
 
 			Utils.matToTexture2D(imgMat, texture);
 
-//			gameObject.GetComponent<Renderer>().material.mainTexture = texture;
+			//			gameObject.GetComponent<Renderer>().material.mainTexture = texture;
 
 
 			renderer.material.SetTexture("_MainTex", texture);
+
+
 		}
 
 		//This requires a shader that enables texture rotation, you can use the supplied CameraView material
