@@ -186,6 +186,10 @@
      <Compile Include="Assets\Tools\OpenCVForUnity\org\opencv\video\BackgroundSubtractorMOG2.cs" />
      <Compile Include="Assets\Tools\OpenCVForUnity\org\opencv\video\KalmanFilter.cs" />
      <Compile Include="Assets\Tools\OpenCVForUnity\org\opencv\video\Video.cs" />
+     <Compile Include="Assets\Tools\OurTool\FaceTracking.cs" />
+     <Compile Include="Assets\Tools\OurTool\LocalFace.cs" />
+     <Compile Include="Assets\Tools\OurTool\PeerFace.cs" />
+     <Compile Include="Assets\Tools\OurTool\Unifier.cs" />
      <Compile Include="Assets\Tools\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
      <Compile Include="Assets\Tools\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
      <Compile Include="Assets\Tools\Photon Unity Networking\Demos\DemoBoxes\DemoBoxesGui.cs" />
@@ -844,12 +848,14 @@
      <Compile Include="Assets\Tools\VideoChat\ExampleTNet\VideoChatExampleTNet.cs" />
      <Compile Include="Assets\Tools\VideoChat\ExampleUnityNet\VideoChatExample.cs" />
      <Compile Include="Assets\Tools\VideoChat\LocalView\LocalView.cs" />
+     <Compile Include="Assets\Tools\VideoChat\LocalView\RemoteView.cs" />
      <Compile Include="Assets\iTween\iTween.cs" />
      <None Include="Assets\Tools\OpenCVForUnity\StreamingAssets\haarcascade_frontalface_alt.xml" />
      <None Include="Assets\Tools\PlayMaker\Readme.txt" />
      <None Include="Assets\Tools\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\Tools\VideoChat\FX\FisheyeShader.shader" />
+     <None Include="Assets\StreamingAssets\haarcascade_frontalface_alt.xml" />
      <None Include="Assets\Tools\Facetracking Starter Kit\readme.txt" />
      <None Include="Assets\Tools\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
@@ -864,28 +870,34 @@
  <HintPath>/Applications/Unity/Unity 4.6.2.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
  <Reference Include="DataConverter">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/Facetracking Starter Kit/Scripts/Kinect/DataConverter.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/Facetracking Starter Kit/Scripts/Kinect/DataConverter.dll</HintPath>
  </Reference>
  <Reference Include="PlayMaker">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/PlayMaker/PlayMaker.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/PlayMaker/PlayMaker.dll</HintPath>
  </Reference>
  <Reference Include="AudioArray">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/AudioArray.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/AudioArray.dll</HintPath>
  </Reference>
  <Reference Include="AudioPacket">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/AudioPacket.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/AudioPacket.dll</HintPath>
+ </Reference>
+ <Reference Include="CLZF2">
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/CLZF2.dll</HintPath>
  </Reference>
  <Reference Include="LANParty">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/LANParty.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/LANParty.dll</HintPath>
+ </Reference>
+ <Reference Include="TextureScale">
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/TextureScale.dll</HintPath>
  </Reference>
  <Reference Include="VideoChat">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/VideoChat.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/VideoChat.dll</HintPath>
  </Reference>
  <Reference Include="VideoPacket">
- <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/VideoPacket.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Github/StickFigureTest/Assets/Tools/VideoChat/Core/VideoPacket.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
