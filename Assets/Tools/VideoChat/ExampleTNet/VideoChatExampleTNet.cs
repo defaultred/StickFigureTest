@@ -6,7 +6,6 @@ public class VideoChatExampleTNet : MonoBehaviour {
 	public bool   testMode;
 	public bool   LAN; //TNet's LAN stuff only works with Universal Plug & Play Devices, i.e. no Apple Airport. LANParty could still be used to setup the remoteIPAddress for a standard TNet connection (see the UnityNet example)
 	public string remoteIPAddress;
-	public bool   pngCompression;
 
 	//TNet stuff
 	public int serverTcpPort = 5127;
@@ -32,7 +31,6 @@ public class VideoChatExampleTNet : MonoBehaviour {
 	public bool acousticEchoCancellation = false; //Make this true to allow echo cancellation, in test mode this will cancel your own voice
 	public int width = 64;
 	public int height = 64;
-	public int chunkSize = 16;
 	
 	private string stringWidth = "64";
 	private string stringHeight = "64";
@@ -40,20 +38,15 @@ public class VideoChatExampleTNet : MonoBehaviour {
 	
 	
 	//Comment out this Update and uncomment the rest once TNet is imported, don't forget to uncommment "using TNet" up top!
+	
 	void Update() {
 		Debug.LogError( "Install TNet and uncomment to use!" );
 	}
-
-	/*
-	//If you use LANParty() with TNet (not provided by default) then ensure this is included
-	void OnApplicationQuit() {
-		LANParty.End();
-	}
-	*/
+	
 
 	/*
 	public TNObject tno;
-
+	
 	// Use this for initialization, Remember TNet won't work with the Web Player
 	void Start() {
 		tno = gameObject.AddComponent( typeof( TNObject ) ) as TNObject;
@@ -66,11 +59,6 @@ public class VideoChatExampleTNet : MonoBehaviour {
 
 		TNManager.StartUDP( Random.Range( 10000, 50000 ) );
 
-		stringWidth = width + "";
-		stringHeight = height + "";
-		stringChunkSize = chunkSize + "";
-
-		VideoChat.pngCompression  = pngCompression;
 		VideoChat.requestedWidth  = width;
 		VideoChat.requestedHeight = height;
 		VideoChat.audioOut3D      = audioOut3D;	
@@ -102,9 +90,6 @@ public class VideoChatExampleTNet : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		if( !VideoChat.tempImage )
-			return;
-
 		GUI.Label( new Rect( 0, 0, Screen.width, Screen.height ), VideoChat.log );
 		if( !TNManager.isConnected && !testMode ) {
 			bool oldTestMode = testMode;
@@ -306,6 +291,6 @@ public class VideoChatExampleTNet : MonoBehaviour {
 
 	void OnNetworkJoinChannel( bool success, string message ) {
     	    Debug.Log("Joining Network Channel: Success = " + success + " Message:" + message);
-    }
+    	}
 	*/
 }
