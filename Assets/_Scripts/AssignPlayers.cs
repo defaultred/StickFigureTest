@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AssignPlayers : Photon.MonoBehaviour {
+public class AssignPlayers:Photon.MonoBehaviour
+{
 
 	public GameObject Grandma;
 	public GameObject Child;
@@ -21,36 +22,37 @@ public class AssignPlayers : Photon.MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
-		PhotonNetwork.ConnectUsingSettings ("1.0");
-		waitingButton.SetActive (false);
-		Grandma.GetComponent<Movement> ().enabled = false;
-		Child.GetComponent<Movement> ().enabled = false;
+		PhotonNetwork.ConnectUsingSettings("2.0");
+		waitingButton.SetActive(false);
+		Grandma.GetComponent<Movement>().enabled = false;
+		Child.GetComponent<Movement>().enabled = false;
 
 	}
 
 	public void loadLevel()
 	{
-		if (!PhotonNetwork.insideLobby) {
-			PhotonNetwork.LeaveRoom ();
-			Application.LoadLevel ("StickFigureTest");
+		if(!PhotonNetwork.insideLobby)
+		{
+			PhotonNetwork.LeaveRoom();
+			Application.LoadLevel("StickFigureTest");
 		}
 	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void Update()
 	{
-		if (PhotonNetwork.playerList.Length >= 2) 
+		if(PhotonNetwork.playerList.Length >= 2)
 		{
-			waitingButton.SetActive (false);
-			joinServerButton.SetActive (false);
+			waitingButton.SetActive(false);
+			joinServerButton.SetActive(false);
 			gameHasStarted = true;
-		} 
-		else if (PhotonNetwork.playerList.Length == 1 && inRoom) 
+		}
+		else if(PhotonNetwork.playerList.Length == 1 && inRoom)
 		{
-			waitingButton.SetActive (true);
-			joinServerButton.SetActive (false);
+			waitingButton.SetActive(true);
+			joinServerButton.SetActive(false);
 		}
 
 		if(PhotonNetwork.playerList.Length == 1 && childSelected == true) //if host leaves
@@ -60,15 +62,15 @@ public class AssignPlayers : Photon.MonoBehaviour {
 			grandmaSelected = false;
 			childSelected = false;
 			firstPlayerToJoin = false;
-			waitingButton.SetActive (false);
-			joinServerButton.SetActive (true);
+			waitingButton.SetActive(false);
+			joinServerButton.SetActive(true);
 		}
 
-		if (PhotonNetwork.playerList.Length == 1 && gameHasStarted == true)
+		if(PhotonNetwork.playerList.Length == 1 && gameHasStarted == true)
 		{
-			PhotonNetwork.LeaveRoom ();
+			PhotonNetwork.LeaveRoom();
 			gameHasStarted = false;
-			Application.LoadLevel ("StickFigureTest");
+			Application.LoadLevel("StickFigureTest");
 		}
 
 		/*if (NetworkedChild.GetComponent<PhotonView> ().isMine) 
@@ -89,7 +91,7 @@ public class AssignPlayers : Photon.MonoBehaviour {
 		{
 			NetworkedGrandma.GetComponent<Movement> ().enabled = false;
 		}
-		
+        
 		if (grandmaSelected) {
 			Grandma.GetComponent<Movement>().enabled = true;
 		} else {Grandma.GetComponent<Movement> ().enabled = false;
@@ -110,11 +112,15 @@ public class AssignPlayers : Photon.MonoBehaviour {
 
 	public void StartChat()
 	{
-		RoomOptions options = new RoomOptions ()
-		{ isVisible = false, isOpen = true, cleanupCacheOnLeave = true };
-		PhotonNetwork.JoinOrCreateRoom ("newRoom", options, TypedLobby.Default);
-		waitingButton.SetActive (true);
-		joinServerButton.SetActive (false);
+		RoomOptions options = new RoomOptions()
+		{
+			isVisible = false,
+			isOpen = true,
+			cleanupCacheOnLeave = true
+		};
+		PhotonNetwork.JoinOrCreateRoom("newRoom", options, TypedLobby.Default);
+		waitingButton.SetActive(true);
+		joinServerButton.SetActive(false);
 		inRoom = true;
 	}
 
@@ -122,21 +128,22 @@ public class AssignPlayers : Photon.MonoBehaviour {
 	{
 		grandmaSelected = true;
 		firstPlayerToJoin = true;
-		Child.SetActive (false);
-		Grandma.SetActive (false);
-		NetworkedGrandma = PhotonNetwork.Instantiate("Granny_Pogo" , new Vector3(-6.94f, -.2f, -.39f), Quaternion.Euler(0, 0, 90), 0);
-		NetworkedGrandma.GetComponent<Movement> ().enabled = true;
+		Child.SetActive(false);
+		Grandma.SetActive(false);
+		NetworkedGrandma = PhotonNetwork.Instantiate("Granny_Pogo", new Vector3(-6.94f, 10.2f, -.39f), Quaternion.Euler(0, 0, 90), 0);
+		NetworkedGrandma.GetComponent<Movement>().enabled = true;
 		//NetworkedGrandma.GetComponent<Movement> ().enabled = true;
+		//NetworkedGrandma.renderer.material = 
 	}
 
 	void OnJoinedRoom()
 	{
-		if (firstPlayerToJoin == false) 
+		if(firstPlayerToJoin == false)
 		{
 			childSelected = true;
-			Grandma.SetActive (false);
-			Child.SetActive (false);
-			NetworkedChild = PhotonNetwork.Instantiate("Kid_Pogo", new Vector3(7.47f, -.2f, -.49f), Quaternion.Euler(0, 0, 90), 0);
+			Grandma.SetActive(false);
+			Child.SetActive(false);
+			NetworkedChild = PhotonNetwork.Instantiate("Kid_Pogo", new Vector3(7.47f, 10.2f, -.49f), Quaternion.Euler(0, 0, 90), 0);
 			NetworkedChild.GetComponent<Movement>().enabled = true;
 			//NetworkedKid.GetComponent<Movement> ().enabled = true;
 		}

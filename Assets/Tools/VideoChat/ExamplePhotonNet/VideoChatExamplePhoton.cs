@@ -6,14 +6,6 @@ using System.Collections;
 
 //Note: Photon seems to work well with chunksPerFrame = 4, packetsPerFrame = 4, and audioPacketSize = 1000
 
-public class VideoChatExamplePhoton : MonoBehaviour {
-	public void Start() {
-		Debug.LogError( "Must have Photon installed to use this script!" );
-	}
-}
-
-//Use this one \/
-/*
 public class VideoChatExamplePhoton : Photon.MonoBehaviour {
 	
 	public bool testMode;
@@ -277,4 +269,3 @@ public class VideoChatExamplePhoton : Photon.MonoBehaviour {
 		Restart();	
 	}
 }
-*/
