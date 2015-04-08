@@ -4,20 +4,25 @@ using System.Collections;
 public class AssignPlayers:Photon.MonoBehaviour
 {
 
-	public GameObject Grandma;
-	public GameObject Child;
 	bool grandmaSelected = false;
 	bool childSelected = false;
 	bool firstPlayerToJoin = false;
 	private PhotonView gameView;
-	public GameObject joinServerButton;
-	public GameObject waitingButton;
 	bool inRoom;
 	float jump = 10000;
 	bool isJumping = false;
+	bool gameHasStarted;
+
+	public GameObject GranFace;
+	public GameObject ChildFace;
+	public GameObject GranPlaceHolder;
+	public GameObject ChildPlaceHolder;
 	public GameObject NetworkedChild;
 	public GameObject NetworkedGrandma;
-	bool gameHasStarted;
+	public GameObject joinServerButton;
+	public GameObject waitingButton;
+	public GameObject Grandma;
+	public GameObject Child;
 
 
 
@@ -128,10 +133,15 @@ public class AssignPlayers:Photon.MonoBehaviour
 	{
 		grandmaSelected = true;
 		firstPlayerToJoin = true;
+		GranFace.transform.SetParent(GranPlaceHolder.transform);
+		ChildFace.transform.SetParent(ChildPlaceHolder.transform);
 		Child.SetActive(false);
+		ChildPlaceHolder.SetActive(false);
 		Grandma.SetActive(false);
 		NetworkedGrandma = PhotonNetwork.Instantiate("Granny_Pogo", new Vector3(-6.94f, 10.2f, -.39f), Quaternion.Euler(0, 0, 90), 0);
 		NetworkedGrandma.GetComponent<Movement>().enabled = true;
+		GranFace.transform.SetParent(GameObject.Find("GranHead").transform);
+		GranFace.transform.localPosition = new Vector3(0,0,0);
 		//NetworkedGrandma.GetComponent<Movement> ().enabled = true;
 		//NetworkedGrandma.renderer.material = 
 	}
@@ -145,6 +155,8 @@ public class AssignPlayers:Photon.MonoBehaviour
 			Child.SetActive(false);
 			NetworkedChild = PhotonNetwork.Instantiate("Kid_Pogo", new Vector3(7.47f, 10.2f, -.49f), Quaternion.Euler(0, 0, 90), 0);
 			NetworkedChild.GetComponent<Movement>().enabled = true;
+			ChildFace.transform.SetParent(GameObject.Find("KidHead").transform);
+			ChildFace.transform.localPosition = new Vector3(0, 0, 0);
 			//NetworkedKid.GetComponent<Movement> ().enabled = true;
 		}
 	}
