@@ -20,22 +20,22 @@ public class Movement:MonoBehaviour
 	{
 		if(gameObject.rigidbody2D.velocity.y > 0.1)
 		{
-			Debug.Log("rising");
+			//Debug.Log("rising");
 			if(gameObject.transform.localPosition.y < 3)
 			{
 				drag = 0;
 			}
 			else
 			{
-				drag = ((Mathf.Abs(gameObject.transform.position.y - 23) / 23) + 1f);
+				drag = ((Mathf.Abs(gameObject.transform.position.y - 23) / 23) + .25f);
 			}
 
 			gameObject.GetComponent<Rigidbody2D>().drag = drag;
-			Debug.Log("drag is: " + drag);
+			//Debug.Log("drag is: " + drag);
 		}
 		else if(gameObject.rigidbody2D.velocity.y < 0.1)
 		{
-			Debug.Log("Falling");
+			//Debug.Log("Falling");
 			drag = 0;
 			gameObject.GetComponent<Rigidbody2D>().drag = drag;
 		}

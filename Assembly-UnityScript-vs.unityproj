@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN;UNITY_PRO_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_2;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX;UNITY_PRO_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity 4.6.2.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>/Applications/Unity/Unity 4.6.2.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,7 @@
      <None Include="Assets\Tools\Alpha Masking\Shaders 3D\Unlit-Alpha-Mask-WorldCoords.shader" />
      <None Include="Assets\Tools\Simple Webcam\Readme.txt" />
      <None Include="Assets\Tools\Alpha Masking\README.txt" />
+     <None Include="Assets\Tools\Facetracking Starter Kit\readme.txt" />
      <None Include="Assets\Tools\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\Tools\VideoChat\Material\UnlitRotatableTexture.shader" />
@@ -68,34 +69,37 @@
      <None Include="Assets\Tools\Photon Unity Networking\changelog.txt" />
      <None Include="Assets\Plugins\Photon3Unity3D.xml" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
+ <HintPath>/Applications/Unity/Unity 4.6.2.app/Contents/UnityExtensions/Unity/GUISystem/4.6.2/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ </Reference>
+ <Reference Include="DataConverter">
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/Facetracking Starter Kit/Scripts/Kinect/DataConverter.dll</HintPath>
  </Reference>
  <Reference Include="PlayMaker">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/PlayMaker/PlayMaker.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/PlayMaker/PlayMaker.dll</HintPath>
  </Reference>
  <Reference Include="AudioArray">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/AudioArray.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/AudioArray.dll</HintPath>
  </Reference>
  <Reference Include="AudioPacket">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/AudioPacket.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/AudioPacket.dll</HintPath>
  </Reference>
  <Reference Include="CLZF2">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/CLZF2.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/CLZF2.dll</HintPath>
  </Reference>
  <Reference Include="LANParty">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/LANParty.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/LANParty.dll</HintPath>
  </Reference>
  <Reference Include="TextureScale">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/TextureScale.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/TextureScale.dll</HintPath>
  </Reference>
  <Reference Include="VideoChat">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/VideoChat.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/VideoChat.dll</HintPath>
  </Reference>
  <Reference Include="VideoPacket">
- <HintPath>C:/Users/Clayton/Documents/GitHub/WIP/StickFigureTest/Assets/Tools/VideoChat/Core/VideoPacket.dll</HintPath>
+ <HintPath>/Volumes/Projects/Personal and random projects/Play Without Boundaries/Mini Games/StickFigureTest/Local Copy/StickFigureTest/Assets/Tools/VideoChat/Core/VideoPacket.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
