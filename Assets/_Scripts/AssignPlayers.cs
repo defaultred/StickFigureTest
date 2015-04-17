@@ -19,7 +19,7 @@ public class AssignPlayers:Photon.MonoBehaviour
 	public GameObject NetworkedGrandma;
 	public GameObject joinServerButton;
 	public GameObject waitingButton;
-	public GameObject placeHolderSumo;
+	public GameObject joiningLobbyButton;
 
 
 
@@ -27,8 +27,9 @@ public class AssignPlayers:Photon.MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		PhotonNetwork.ConnectUsingSettings("3.0");
+		PhotonNetwork.ConnectUsingSettings("3.1");
 		waitingButton.SetActive(false);
+		joinServerButton.SetActive (false);
 
 	}
 
@@ -72,6 +73,12 @@ public class AssignPlayers:Photon.MonoBehaviour
 		//}
 	}
 
+	void OnJoinedLobby()
+	{
+		joinServerButton.SetActive (true);
+		joiningLobbyButton.SetActive (false);
+	}
+
 	void OnLeftRoom()
 	{
 		inRoom = false;
@@ -98,9 +105,8 @@ public class AssignPlayers:Photon.MonoBehaviour
 	{
 		grandmaSelected = true;
 		firstPlayerToJoin = true;
-		placeHolderSumo.SetActive(false);
 		NetworkedGrandma = PhotonNetwork.Instantiate("Granny_Pogo", new Vector3(-6.94f, 10.2f, -.39f), Quaternion.Euler(0, 0, 90), 0);
-		NetworkedGrandma.GetComponent<Movement>().enabled = true;
+		NetworkedGrandma.GetComponent<OnlinePlayMovement>().enabled = true;
 		//localFace.transform.SetParent(NetworkedGrandma.transform);
 		//localFace.transform.localPosition = new Vector3(20,0,0);
 	}
@@ -110,9 +116,8 @@ public class AssignPlayers:Photon.MonoBehaviour
 		if(firstPlayerToJoin == false)
 		{
 			childSelected = true;
-			placeHolderSumo.SetActive(false);
 			NetworkedChild = PhotonNetwork.Instantiate("Kid_Pogo", new Vector3(7.47f, 10.2f, -.49f), Quaternion.Euler(0, 0, 90), 0);
-			NetworkedChild.GetComponent<Movement>().enabled = true;
+			NetworkedChild.GetComponent<OnlinePlayMovement>().enabled = true;
 			//localFace.transform.SetParent(NetworkedChild.transform);
 			//localFace.transform.localPosition = new Vector3(34, 0, 0);
 		}
