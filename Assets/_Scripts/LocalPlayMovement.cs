@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LocalPlayMovement : MonoBehaviour 
 {
@@ -13,42 +14,140 @@ public class LocalPlayMovement : MonoBehaviour
 		public int playerNumber = 0;
 		int dashDirection;
 		bool dashing;
+		float dashPower;
+		float oldPosition;
+		float movementDirection;
+		bool collisionHappened;
+		public Sprite player1Idle;
+		public Sprite player2Idle;
+		public Sprite player1DashLeft;
+		public Sprite player2DashLeft;
+		public Sprite player1DashRight;
+		public Sprite player2DashRight;
+		public Sprite player1Down;
+		public Sprite player2Down;
+		public GameObject player1Score;
+		public GameObject player2Score;
+		int P1Score = 0;
+		int P2Score = 0;
 	
-	void Update()
+
+	
+	void LateUpdate()
 	{
 
-	controlSpeed ();
-	controlHeight ();
-	preventWallPassThrough ();
-	watchForPlayerMovement ();
-	checkIfDashing ();
-	dashDamage ();
+		player1Score.GetComponent<Text> ().text = P1Score.ToString ();
+		player2Score.GetComponent<Text> ().text = P2Score.ToString ();
 
+		controlSpeed ();
+		controlHeight ();
+		watchForPlayerMovement ();
+		checkIfDashing ();
+		checkDirectionPlayerIsMoving ();
+		checkifGroundPounding ();
+
+		//Debug.Log (movementDirection);
+		//Debug.Log (dashPower);
+
+		if(movementDirection < 0)
+		{
+			if(dashPower > 6)
+			{
+				dashPower = 6;
+			}
+			else if(dashPower < 3)
+			{
+				dashPower = 3;
+			}
+			else
+			{
+				dashPower = (gameObject.transform.localPosition.y/3) * (-1);
+			}
+			//Debug.Log ("Push other player left");
+		}
+		else if(movementDirection > 0)
+		{
+			if(dashPower > 6)
+			{
+				dashPower = 6;
+			}
+			else if(dashPower < 3)
+			{
+				dashPower = 3;
+			}
+			else
+			{
+				dashPower = (gameObject.transform.localPosition.y/3) * (1);
+			}
+			//Debug.Log ("Push other player right");
+		}
+
+		
+	}
+
+	void checkDirectionPlayerIsMoving()
+	{
+		movementDirection = transform.position.x - oldPosition;
+		oldPosition = transform.position.x;
+	}
+
+	void OnCollisionStay2D(Collision2D collisionStay)
+	{
+		if(collisionStay.gameObject.tag == "Player1" || collisionStay.gameObject.tag == "Player2" )
+		{
+			//float enemyPosition;
+			//float myPosition;
+			//float direction;
+			
+			Debug.Log ("collisionStay");
+			//enemyPosition = collisionStay.transform.position.x;
+			//myPosition = transform.position.x;
+			//direction = (enemyPosition - myPosition);
+			//gameObject.transform.LookAt(collisionStay.transform);
+			//iTween.Stop (gameObject);
+			//iTween.Stop (collisionStay.gameObject);
+			//iTween.MoveAdd(collisionStay.gameObject, new Vector3(dashPower, 0 ,0), 1);
+			//iTween.MoveAdd(gameObject, new Vector3(0, 0 ,0), 2);
+			//iTween.MoveAdd(gameObject, Vector3.forward, 2);
+			//collisionHappened = true;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
+		if(collision.gameObject.tag == "Wall")
+		{
+			iTween.Stop (gameObject);
+		}
 		if (collision.gameObject.tag == "Stage") 
 		{
+			//Debug.Log("Hit Stage");
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
 		}
-		if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Player2")
+		if (collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
 		{
-			Debug.Log ("hit player");
+
+			Debug.Log ("collision");	
+			//iTween.Stop (gameObject);
+			//iTween.Stop (collision.gameObject);
+			iTween.MoveAdd(collision.gameObject, new Vector3(dashPower, 0 ,0), 2);
+			iTween.MoveAdd(gameObject, new Vector3(0, 0 ,0), 2);
+			collisionHappened = true;
+			//gameObject.GetComponent<Rigidbody2D>().interpolation
+		}
+		if(collision.gameObject.tag == "out of bounds")
+		{
+			Debug.Log ("Out of bounds");
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
-			iTween.Stop (collision.gameObject);
-		}
-	}
-	
-	void dashDamage()//adds mass if dashing
-	{
-		if(gameObject.GetComponent<iTween>() == null)
-		{
-			gameObject.GetComponent<Rigidbody2D>().mass = 10;
-		}
-		else
-		{
-			gameObject.GetComponent<Rigidbody2D>().mass = 50;
+			if (playerNumber == 1)
+			{
+				P2Score += 1;
+			}
+			if(playerNumber == 2)
+			{
+				P1Score += 1;
+				Debug.Log (P1Score);
+			}
 		}
 	}
 
@@ -57,12 +156,37 @@ public class LocalPlayMovement : MonoBehaviour
 		if (gameObject.GetComponent<iTween> () == null) 
 		{
 			dashing = false;
+			if(playerNumber == 1)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = player1Idle;
+			}
+			if(playerNumber == 2)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = player2Idle;
+			}
 		} 
 		else 
 		{
 			dashing = true;
 		}
 	}
+
+	void checkifGroundPounding()
+	{
+		if(gameObject.GetComponent<Rigidbody2D>().gravityScale == 10)
+		{
+			if(playerNumber == 1)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = player1Down;
+			}
+			if(playerNumber == 2)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = player2Down;
+			}
+		}
+	}
+
+	
 
 	void controlHeight()
 	{
@@ -89,78 +213,23 @@ public class LocalPlayMovement : MonoBehaviour
 	
 	void controlSpeed()
 	{
-		if (gameObject.rigidbody2D.velocity.x > 20 || gameObject.rigidbody2D.velocity.y > 50 || gameObject.rigidbody2D.angularVelocity > 20) 
+		if (gameObject.rigidbody2D.velocity.x > 10 || gameObject.rigidbody2D.velocity.y > 50 || gameObject.rigidbody2D.angularVelocity > 20) 
 		{ 
+			iTween.Stop(gameObject);
 			gameObject.rigidbody2D.velocity = new Vector2(0,0);
-		}
-	}
-	
-	void preventWallPassThrough()
-	{
-		if (playerNumber == 1) 
-		{
-			if(gameObject.transform.position.x >= 13.4) //right wall hit
-			{
-				if(Input.GetKey(KeyCode.LeftArrow))
-				{
-					iTween.MoveAdd(gameObject, new Vector3(-10,0,0),1);
-				}
-				else
-				{
-					iTween.Stop (gameObject);
-				}	
-			}
-			if(gameObject.transform.position.x <= -13.6) //left wall hit
-			{
-				if(Input.GetKey(KeyCode.RightArrow))
-				{
-					iTween.MoveAdd(gameObject, new Vector3(10,0,0),1);
-				}
-				else
-				{
-					iTween.Stop (gameObject);
-				}	
-			}
-		}
-		if (playerNumber == 2)
-		{
-			if(gameObject.transform.position.x >= 13.4) //right wall hit
-			{
-				if(Input.GetKey(KeyCode.A))
-				{
-					iTween.MoveAdd(gameObject, new Vector3(-10,0,0),1);
-				}
-				else
-				{
-					iTween.Stop (gameObject);
-				}	
-			}
-			if(gameObject.transform.position.x <= -13.6) //left wall hit
-			{
-				if(Input.GetKey(KeyCode.D))
-				{
-					iTween.MoveAdd(gameObject, new Vector3(10,0,0),1);
-				}
-				else
-				{
-					iTween.Stop (gameObject);
-				}	
-			}
+			gameObject.transform.position = transform.localPosition;
 		}
 	}
 
-	void playerDash(int dashDirection, int dashSpeed)
+	void playerDash(int dashDirection, float dashSpeed)
 	{
-		//preventWallPassThrough ();
-
-		if(gameObject.GetComponent<iTween>() == null)
+		if(gameObject.GetComponent<iTween>() == null || collisionHappened == false)
 		{
 			iTween.MoveAdd(gameObject, new Vector3(dashDirection,0,0),dashSpeed);	
 		}
 		else
 		{
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
-			gameObject.GetComponent<Rigidbody2D>().mass = 50;
 		}
 	}
 	void watchForPlayerMovement()
@@ -169,31 +238,43 @@ public class LocalPlayMovement : MonoBehaviour
 		{
 			if(Input.GetKeyDown(KeyCode.LeftArrow))
 			{
-				playerDash(-5,1);
+					collisionHappened = false;
+					gameObject.GetComponent<SpriteRenderer>().sprite = player1DashLeft;
+					playerDash(-2,.5f);
 			}
 			if(Input.GetKeyDown(KeyCode.RightArrow))
 			{
-				playerDash(5,1);
+					collisionHappened = false;
+					gameObject.GetComponent<SpriteRenderer>().sprite = player1DashRight;
+					playerDash(5,.5f);
 			}
 			if(Input.GetKeyDown (KeyCode.DownArrow))
 			{
+				collisionHappened = false;
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 10;
+				gameObject.GetComponent<SpriteRenderer>().sprite = player1Down;
 			}
 		}
 
 		if(playerNumber == 2)
 		{
-			if(Input.GetKey(KeyCode.A))
+			if(Input.GetKeyDown(KeyCode.A))
 			{
-				playerDash(-5,1);
-			}
-			if(Input.GetKey(KeyCode.D))
+					collisionHappened = false;
+					gameObject.GetComponent<SpriteRenderer>().sprite = player2DashLeft;
+					playerDash(-5,.5f);
+			}	
+			if(Input.GetKeyDown(KeyCode.D))
 			{
-				playerDash(5,1);
+					collisionHappened = false;
+					gameObject.GetComponent<SpriteRenderer>().sprite = player2DashRight;
+					playerDash(2,.5f);
 			}
 			if(Input.GetKeyDown (KeyCode.S))
 			{
+				collisionHappened = false;
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 10;
+				gameObject.GetComponent<SpriteRenderer>().sprite = player2Down;
 			}
 		}
 	}
