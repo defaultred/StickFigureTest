@@ -27,7 +27,8 @@ public class AssignPlayers:Photon.MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		PhotonNetwork.ConnectUsingSettings("3.1");
+		PhotonNetwork.ConnectToMaster("162.250.6.242", 5055, "StickFigureTest", "3.1");
+		//PhotonNetwork.ConnectUsingSettings("3.1");
 		waitingButton.SetActive(false);
 		joinServerButton.SetActive (false);
 
